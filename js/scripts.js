@@ -10,8 +10,10 @@ fetch(myFile)
         cities.forEach(city => {
             let cityList = document.getElementById('city-list');
             let cityListItem = document.createElement('li');
+            const cityListContainer = document.querySelector(".navbar");
             let cityListItemLink = document.createElement('a');
             cityListItemLink.setAttribute('href', '#');
+            // cityListItemLink.classList.add('nav-link');
             cityListItem.appendChild(cityListItemLink);
             cityListItemLink.innerHTML = city.label;
             cityList.appendChild(cityListItem);
@@ -23,11 +25,24 @@ fetch(myFile)
                 e.preventDefault();
                 let active = document.querySelector('.active');
                 if (active) {
-                    console.log('contains active');
+                    // console.log('contains active');
+                    
+                    // no need for method chaining below since it's a one time thing
                     active.classList.remove('active');
+                    active.removeAttribute('class');
                 }
-                e.target.className = "active";
+                // e.target.className = "active";
+                e.target.classList.add('active');
+                
+                 cityListContainer.style.setProperty(
+                    "--underline-width",
+                    `${e.target.offsetWidth}px`
+                );
+                cityListContainer.style.setProperty(
+                    "--underline-offset-x",
+                    `${e.target.offsetLeft}px`
+                );
             });
         })
     })
-    // .catch(error => console.log(error));
+
