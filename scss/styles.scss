@@ -1,6 +1,7 @@
 html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}ul{list-style:none}button,input,select{margin:0}html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}img,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
 
 :root {
+    --color-light: #fff;
     --color-bg: #ededed;
     --color-txt: #1a1a1a;
     --color-link: #838383;
@@ -11,12 +12,14 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     --color-border: var(--color-link);
     --color-border-hover: var(--color-txt);
     --color-border-light: #b3b3b3;
+    --color-time-zone: rgba(255, 255, 255, 0.33);
     --bold: 500;
-    --border-height: 0.11em;
+    --border-height: 0.15em;
 }
 
 @media (prefers-color-scheme:dark) {
     :root {
+        --color-light: #000;
         --color-bg: #1a1a1a;
         --color-txt: #ededed;
         --color-link: #b4b4b4;
@@ -27,6 +30,7 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
         --color-border: var(--color-link);
         --color-border-hover: var(--color-txt);
         --color-border-light: #565656;
+        --color-time-zone: rgba(33, 33, 33, 0.33);
         --bold: 500;
         --border-height: 0.11em;
     }
@@ -93,6 +97,34 @@ header {
                 transition: transform 0.5s, width 0.5s;
             }
             li {
+                text-align: center;
+                &:hover span, &:hover a {
+                        color: var(--color-link-hover);
+                        // font-weight: var(--bold);
+                    }
+                &:hover span {
+                    background-color: var(--color-light);
+                    transform: translateY(-.33em);
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+                }
+                span {
+                    display: inline-block;
+                    padding: 1em;
+                    margin-bottom: 2em;
+                    width: 80px;
+                    min-height: 80px;
+                    line-height: 1.11;
+                    font-size: 1.11em;
+                    font-weight: var(--bold);
+                    border-radius: 50%;
+                    background-color: var(--color-time-zone);
+                    color: var(--color-link);
+                    transition: all .33s ease-in-out;
+                    
+                    &:hover {
+                        color: var(--color-link-hover);
+                    }
+                }
                 a {
                     text-decoration: none;
                     color: var(--color-link);
@@ -103,10 +135,6 @@ header {
                     transition: all .11s ease;
                     display: block;
 
-                    &:hover {
-                        color: var(--color-link-hover);
-                        // font-weight: var(--bold);
-                    }
                     &.active {
                         color: var(--color-link-active);
                         // font-weight: var(--bold);
@@ -140,11 +168,25 @@ header {
                     display: none;
                 }
                 li {
+                    margin-bottom: 1.33em;
+                    span {
+                        width: auto;
+                        min-height: auto;
+                        margin-bottom: .11em;
+                        border-radius: 4px;
+                        padding: .33em;
+                    }
                     a {
-                        margin: .5em 0;
+                        margin: 0;
                         &.active {
                             font-weight: var(--bold);
                         }
+                    }
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    &:hover span {
+                        transform: translateY(0);
                     }
                 }
             }
